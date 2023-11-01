@@ -12,7 +12,7 @@ def load_fields(fpath,input_type='text',phone_list_path=''):
 
 #phrases = load_fields('/Users/adaezeadigwe/Desktop/Edinburgh/Projects/Conv_Perception_Exp/sentences.tsv')
 styletext = '<style>table {width:100%;}table, th, td {border: 1px solid black;border-collapse: collapse;}</style>'
-output_directory= "./output/results_new"
+output_directory= "./output/results"
 
 def html_start_syntax():
     html_file = open('index.html', 'w')
@@ -29,7 +29,6 @@ def html_end_syntax(html_file):
 def build_utt_control_dictionary(utt, output_directory):
     utt_synthesis_dictionary = {}
     for folderitem in os.listdir(output_directory):
-        print(folderitem)
         _, pa, pr, _ = folderitem.split('~')
         for fn in os.listdir(os.path.join(output_directory, folderitem)):
             if fn.endswith('wav') and fn.startswith(utt):
@@ -41,8 +40,6 @@ def build_utt_control_dictionary(utt, output_directory):
 
 
 utterance_ids = [
-    '001',
-    '002',
     '2019-16',
     '3389-90',
     '17510',
@@ -50,8 +47,8 @@ utterance_ids = [
     '14417'
 ]
 
-pa = ['pa-0.5', 'pa0',  'pa0.5', 'pa0.8']
-pr = ['pr-0.5','pr0',  'pr0.5', 'pr0.8']
+pa = ['pa-0.5', 'pa0', 'pa0.8']
+pr = ['pr-0.8','pr0', 'pr0.8']
 
 #HTML Start File
 html_file = html_start_syntax()
