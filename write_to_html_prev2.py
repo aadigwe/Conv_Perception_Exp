@@ -12,7 +12,7 @@ def load_fields(fpath,input_type='text',phone_list_path=''):
 
 #phrases = load_fields('/Users/adaezeadigwe/Desktop/Edinburgh/Projects/Conv_Perception_Exp/sentences.tsv')
 styletext = '<style>table {width:100%;}table, th, td {border: 1px solid black;border-collapse: collapse;}</style>'
-output_directory= "./output/15-11-results"
+output_directory= "./output/results_new"
 
 def html_start_syntax():
     html_file = open('index.html', 'w')
@@ -30,7 +30,7 @@ def build_utt_control_dictionary(utt, output_directory):
     utt_synthesis_dictionary = {}
     for folderitem in os.listdir(output_directory):
         print(folderitem)
-        _, pa, pr, _ = folderitem.split('_')
+        _, pa, pr, _ = folderitem.split('~')
         for fn in os.listdir(os.path.join(output_directory, folderitem)):
             if fn.endswith('wav') and fn.startswith(utt):
                 audiofullpath=os.path.join(output_directory, folderitem, fn)
@@ -43,18 +43,15 @@ def build_utt_control_dictionary(utt, output_directory):
 utterance_ids = [
     '001',
     '002',
-    '003',
-    '004',
-    '005',
-    '006',
-    '007',
-    '008',
-    '009',
-    '010',
+    '2019-16',
+    '3389-90',
+    '17510',
+    '9026',
+    '14417'
 ]
 
-pa = ['pa-0.5', 'pa-0.4', 'pa0', 'pa0.4',  'pa0.5', 'pa0.9']
-pr = ['pr0','pr0.2', 'pr0.4', 'pr0.5', 'pr0.7', 'pr0.9']
+pa = ['pa-0.5', 'pa0',  'pa0.5', 'pa0.8']
+pr = ['pr-0.5','pr0',  'pr0.5', 'pr0.8']
 
 #HTML Start File
 html_file = html_start_syntax()
@@ -79,7 +76,7 @@ for utt in utterance_ids:
             if key_comb in available_comb_pairs:
                 print(utt_synthesis_dictionary[key_comb])
                 html_file.write('<td><audio controls><source src='+'"' +
-                        utt_synthesis_dictionary[key_comb] + '"' + ' type="audio/mpeg"></audio><br />' + utt_synthesis_dictionary[key_comb] +'</td>')
+                        utt_synthesis_dictionary[key_comb] + '"' + ' type="audio/mpeg"></audio></td>')
             else:
                 html_file.write('<td>N/A</td>')
         html_file.write('</tr>')
